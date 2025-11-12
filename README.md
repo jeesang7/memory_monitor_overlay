@@ -1,5 +1,8 @@
 # memory_monitor_overlay
 
+[![Pub Version](https://img.shields.io/pub/v/memory_monitor_overlay)](https://pub.dev/packages/memory_monitor_overlay)
+![Pub Monthly Downloads](https://img.shields.io/pub/dm/memory_monitor_overlay)
+
 A simple Flutter overlay to monitor memory usage in real-time
 
 ## Features
@@ -50,3 +53,7 @@ Widget build(BuildContext context) {
     );
   }
 ```
+
+## Screenshot
+
+![](https://github.com/jeesang7/memory_monitor_overlay/blob/main/screenshots/memory_monitor_demo.GIF)
