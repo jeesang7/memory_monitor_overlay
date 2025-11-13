@@ -1,6 +1,6 @@
 name: memory_monitor_overlay
 description: "A simple Flutter overlay to monitor memory usage in real-time"
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/jeesang7/memory_monitor_overlay
 
 environment:

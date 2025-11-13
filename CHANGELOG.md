@@ -1,4 +1,4 @@
-## 0.0.4
+## 0.0.5
 
 - Update README
 - Add workflow for publishing to pub.dev
