@@ -56,5 +56,4 @@ Widget build(BuildContext context) {
 ```
 
 ## Screenshot
-
-![](https://github.com/jeesang7/memory_monitor_overlay/blob/main/screenshots/memory_monitor_demo.GIF)
+![](screenshots/memory_monitor_demo.GIF)
