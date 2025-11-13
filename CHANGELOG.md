@@ -1,4 +1,9 @@
+## 0.0.2
+
+- Update README
+- Add workflow for publishing to pub.dev
+
 ## 0.0.1
 
-* Initial release
-* Add a draggable overlay widget
+- Initial release
+- Add a draggable overlay widget
