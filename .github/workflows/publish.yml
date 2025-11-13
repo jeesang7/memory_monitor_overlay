@@ -7,9 +7,6 @@ on:
 
 jobs:
   publish:
-    permissions:
-      id-token: write # Required for authentication using OIDC
-
     runs-on: ubuntu-22.04
 
     steps:
@@ -36,4 +33,9 @@ jobs:
       - name: Dry run publish
         run: flutter pub publish --dry-run
 
-      - uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+      - name: Publish to pub.dev
+        uses: k-paxian/dart-package-publisher@v1.6
+        with:
+          credentialJson: ${{ secrets.PUB_CREDENTIALS_JSON }}
+          flutter: true
+          skipTests: true
