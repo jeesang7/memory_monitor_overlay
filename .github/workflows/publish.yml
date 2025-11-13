@@ -30,20 +30,12 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Create pub-credentials.json (safe)
-        run: |
-          set -euo pipefail
-          mkdir -p "$HOME/.config/dart"
-          # 안전하게 시크릿을 파일로 쓰고 CRLF 제거, 권한 고정
-          printf '%s' "${{ secrets.PUB_CREDENTIALS_JSON }}" | tr -d '\r' > "$HOME/.config/dart/pub-credentials.json"
-          chmod 600 "$HOME/.config/dart/pub-credentials.json"
-          # 확인: 파일 존재와 길이만 출력(비밀 내용은 출력하지 않음)
-          ls -la "$HOME/.config/dart"
-          echo "pub-credentials.json written (size: $(wc -c < "$HOME/.config/dart/pub-credentials.json")) bytes"
-        shell: bash
-
       - name: Dry run publish
         run: flutter pub publish --dry-run
 
       - name: Publish to pub.dev
-        run: flutter pub publish --force
+        uses: k-paxian/dart-package-publisher@v1.6
+        with:
+          credentialJson: ${{ secrets.PUB_CREDENTIALS_JSON }}
+          flutter: true
+          skipTests: true
