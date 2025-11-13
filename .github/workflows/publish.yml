@@ -30,12 +30,14 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Create pub-credentials.json
+        run: |
+          mkdir -p ~/.config/dart
+          echo "${{ secrets.PUB_CREDENTIALS_JSON }}" > ~/.config/dart/pub-credentials.json
+        shell: bash
+
       - name: Dry run publish
         run: flutter pub publish --dry-run
 
       - name: Publish to pub.dev
-        uses: k-paxian/dart-package-publisher@v1.6
-        with:
-          credentialJson: ${{ secrets.PUB_CREDENTIALS_JSON }}
-          flutter: true
-          skipTests: true
+        run: flutter pub publish --force
