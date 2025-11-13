@@ -30,10 +30,24 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Create pub-credentials.json
+      - name: Create pub-credentials.json (safe)
         run: |
-          mkdir -p ~/.config/dart
-          echo "${{ secrets.PUB_CREDENTIALS_JSON }}" > ~/.config/dart/pub-credentials.json
+          set -euo pipefail
+          mkdir -p "$HOME/.config/dart"
+          # 안전하게 시크릿을 파일로 쓰고 CRLF 제거, 권한 고정
+          printf '%s' "${{ secrets.PUB_CREDENTIALS_JSON }}" | tr -d '\r' > "$HOME/.config/dart/pub-credentials.json"
+          chmod 600 "$HOME/.config/dart/pub-credentials.json"
+          # 확인: 파일 존재와 길이만 출력(비밀 내용은 출력하지 않음)
+          ls -la "$HOME/.config/dart"
+          echo "pub-credentials.json written (size: $(wc -c < "$HOME/.config/dart/pub-credentials.json")) bytes"
+        shell: bash
+
+      - name: Optional debug: print first/last lines of credentials (will mask secret in logs)
+        if: ${{ always() }}
+        run: |
+          # 주의: 이 줄은 시크릿 내용 자체를 출력하지 않도록 주의하세요.
+          echo "First line (masked):"
+          head -n 1 "$HOME/.config/dart/pub-credentials.json" | sed -e 's/./*/g'
         shell: bash
 
       - name: Dry run publish
