@@ -6,7 +6,7 @@ on:
       - "**"
 
 jobs:
-  build:
+  publish:
     permissions:
       id-token: write # Required for authentication using OIDC
 
@@ -36,5 +36,4 @@ jobs:
       - name: Dry run publish
         run: flutter pub publish --dry-run
 
-      - name: Publish to Pub.dev
-        run: flutter pub publish -f # -f forces publishing without confirmation
+      - uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
